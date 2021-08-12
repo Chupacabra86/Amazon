@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+
+<main class="container">
+    <h1 class="text-center my-3">Mon panier</h1>
+
+    <div class="py-3 fs-3">Total du panier : {{ cart.total }} € </div>
+
+    <table class="table table-dark table-hover table-striped table-responsive">
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Prix unitaire</th>
+            <th>Quantité</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for element in cart.elements %}
+        <tr>
+            <td>{{ element.book.id }}</td>
+            <td>{{ element.book.title }}</td>
+            <td>{{ element.book.price }}</td>
+            <td>{{ element.quantity }}</td>
+            <td>
+                <a class="btn btn-sm btn-success" href="{{ path('panier_add', {'id': element.book.id}) }}"> + </a>
+                <a class="btn btn-sm btn-success" href="{{ path('panier_delete', {'id': element.book.id}) }}"> - </a>
+                <a class="btn btn-sm btn-success" href="{{ path('panier_remove_line', {'id': element.book.id}) }}"> - </a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="4">Votre panier est vide</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a class="btn btn-md btn-danger py-3" href="{{ path('panier_empty') }}"> Vider le panier </a>
+    <a class="btn btn-md btn-success py-3" href="{{ path('panier_validate') }}"> Passer la commande </a>
+
+</main>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catalogue{% endblock %}
+
+{% block body %}
+
+<main class="container">
+    <h1 class="text-center py-5">Liste des livres</h1>
+
+    <table class="table table-dark table-hover table-striped table-responsive">
+        <thead>
+            <tr>
+                <th>Numéro</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.description }}</td>
+                <td>{{ book.price }}</td>
+                <td>
+                    <a href="{{ path('panier_add', {'id': book.id}) }}">ajouter au panier</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+
+{% endblock %}
