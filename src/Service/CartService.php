@@ -10,7 +10,7 @@ class CartService
 {
     private $sessionInterface;
 
-    public function __construct(SessionInterface $sessionInterface)
+    public function __construct(SessionInterface $sessionInterface)     // SessionInterface est une dépendance, pas un paramètre
     {
         $this->sessionInterface = $sessionInterface;
     }
